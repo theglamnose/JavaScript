@@ -1,0 +1,180 @@
+
+
+   Higher-order modules (in TypeScript)
+   
+Nowadays applications are built of smaller parts, called modules. This helps you
+to break down a big problem into smaller ones, which can be handled and
+implemented more easily.
+Also, you don't need to invent the wheel again: there are a lot of libraries
+(consisting of modules), which you can use for your application.
+Very often a module not just offers some functions and objects to use right away
+(e.g. draw a circle on a canvas), but before you can use them you have to
+initialize the modules with some starting data. E.g. the i18n library needs
+some phrase lists separated by language to help you to apply the translation
+functions. So, you have an initialization time and an application time of the i18n module.
+
+A module M, which needs some starting information is called
+a higher-order module, because the information given at the initialization
+is packed into a module I. Then the library module M operates on the
+information I and returns a new module J, which you can use for your work.
+So, we have a module M, which consumes another module I and returns a new module J.
+
+OK, this sounds very abstract. Let's look at a small example.
+We want to build a module Set, which implements a set of arbitrary elements.
+Because we not only want to use sets of numbers, but we also want to use the module Set on
+an arbitrary but specified type of elements: sets of numbers, sets of strings, and so on.
+
+Due to this we specify the methods, which Set is going to offer to us with a type
+variable T. T stands for the datatype of elements, that we want to put in a set.
+Here is a small list of methods, which you usually find in a library for working with sets:
+
+   makeSet(): Set<T>                  // Returns an empty set.
+   add( s:Set<T>, t:T): Set<T>        // Add an element to the set (no change, if the element is already a member).
+   empty( s:Set<T>): boolean          // Check, if the set s is empty.
+   member( e:T, s:Set<T>): boolean    // Check, if e is a member of the set s.
+   union( s:Set<T>, t:Set<T>): Set<T> // Build the union of the two sets s and t.
+   :    // and many more useful functions ..
+   
+Here you can see the type variable T in the specification of the functions.
+We have used here the syntax of TypeScript to specify the set methods.
+
+We can implement a set in a naive way as an array of objects, but this is inefficient,
+because the mean search time has complexity O(n), where n is the number of elements in a set.
+There exists a better way to implement a set. Let's look at the set {1,..,7}.
+You can store these seven numbers in a binary tree:
+       4
+    /     \
+   2       6
+  / \     / \
+ 1   3   5   7
+As you can see, the numbers are sorted in the tree. If you look at a node with number i,
+than all numbers in the left subtree are smaller than i; and in the right subtree all numbers
+are greater than i.
+
+This tree looks nice, because he is balanced (think about a scale with weights at the leaves). 
+And then there is another nice property of the tree: the mean search time is
+O(lg n), which is for big n (n is the number of elements in the set) much smaller than O(n).
+Example: for n = 10^6 (a million elements) the value of lg(n) is about 20. And this is obviously
+smaller than 500.000.
+OK, we decide to use binary balanced trees to implement the set, but we don't go into the
+implementation details, because we are only interested in the specification and the usage of the
+Set module.
+
+What do we need to initialize the Set<T> module?
+To mention the data type T for the elements alone is not enough; you also need a function
+to compare elements (the elements inside of a binary tree are sorted).
+
+Let's write down the information, that the higher-order module Set needs:
+
+	type T;   // Data type of the elements.
+	cmp( e:T, f:T): ( -1 | 0 | 1);
+	   // Function to compare two elements:
+	   // cmp(a,b) = -1 if a < b
+	   // cmp(a,b) =  0 if a = b
+	   // cmp(a,b) =  1 if a > b
+
+If you give an existing type T and a function cmp to the module Set, you will get a
+new module Set<T> with the specified set methods. Note, that the function cmp does not
+appear in the list of set methods. The function cmp is used inside of the module Set<T>
+to work on balanced trees. Also, the balanced trees are hidden inside of the module.
+(This is called "information hiding".)
+
+You might say, this is not new, because the Array class offers the sort method, which
+also uses a cmp function:
+  sort(
+	a: T[],
+	cmp( e:T, f:T): ( -1 | 0 | 1)
+  ): T[];
+
+But there is an important difference between Array.sort() and Set<T>:
+Array.sort() is a higher-order function, which uses the cmp function as a parameter
+  and returns a value (a sorted array).
+Set<T> is a higher-order module, which uses a module (containing a type and a cmp function)
+  and returns a module (a collection of methods to work on a set).
+  
+The abstract concept of higher-order modules is a handy method to think about libraries,
+and can be used in every programming language, which supports modules.
+
+Now the interesting question arises: does TypeScript support higher-order modules?
+Answer: yes and no.
+
+First the bad news: it is not possible to specify and write higher-order modules in a strict way
+as in functional programming languages (e.g. SML), because it is not possible to generate new
+modules/classes during run-time. Also, the type specifications offered by TypeScript do not allow to
+specify types local to a module.
+
+Now the good news: it is possible to simulate higher-order modules.
+The higher-order module is implemented by a class. The constructor of this class
+takes the needed information for the initialization	and builds a new instance, which contains
+the methods of the new module. We use a class as a higher-order module, because we can hide the
+internal representation of the set by private data structures inside of the class.
+To be type-safe during compile-time you can use an interface specification to 
+describe the produced instance/module.
+
+For our example with the Set module the code would look like this:
+
+  // We use an existing module with binary trees.
+	  import { binTree} from "binTree.ts";
+  
+  // The specification of the function to be given at the initialization:
+	  interface ordered<T> {
+		compare( t:T, s:T): number
+	  };
+  
+  // Specification of the produced Set<T> module:
+	interface set<T> {
+		// constructor:
+		//   set<T>( ord: ordered<T>)
+		add( t:T): void;
+		empty(): boolean;
+		member( t:T): boolean;
+		union( s:set<T>): void;
+	};
+
+  // Implementation of the Set module as a class:
+	class makeSet<T> implements set<T> {
+
+		private set_as_a_tree: binTree<T> | null;
+		private cmp(t: T, s: T): number{ return 0}; 
+
+		constructor( ord: ordered<T>){
+			this.cmp = ord.compare;
+			this.set_as_a_tree = null;
+		};
+
+		public add(t: T): void {
+			// Insert element t into the tree 'set_as_a_tree'
+			// and use function 'cmp' to build a balanced tree.
+		};
+
+		public empty(): boolean {
+			return( this.set_as_a_tree === null);
+		};
+
+		public member(t: T): boolean {
+			// Search for element t in the tree 'set_as_a_tree'
+			// and use function 'cmp' to build a balanced tree.
+		};
+
+		public union(s: set<T>): void {
+			// Add each element of set s to the tree 'set_as_a_tree'
+			// and use function 'cmp' to build a balanced tree.
+		}
+	};
+  
+  // Generate two sets. One for numbers and one for strings.
+	  const orderedNumbers: ordered<number> = {
+		compare(t: number, s: number): number {
+			return( t - s);
+		}
+	  };
+	  let numSet = new makeSet<number>( orderedNumbers);
+
+	  const orderedStrings: ordered<string> = {
+		compare(t: string, s: string): number {
+			return( t.length - s.length);
+		}
+	  };
+	  let strSet: makeSet<string> = new makeSet<string>( orderedStrings);
+  
+  
