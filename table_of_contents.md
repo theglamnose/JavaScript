@@ -7,6 +7,16 @@ In the directory at hand you will find some programs written in JavaScript.
 
 <dl>
   <dt><code>
+  elevator
+  </code> </dt>
+  <dd> 
+  Simulation of an elevator, taken from the textbook "*The Art of Computer Programming*" written by Donald Ervin Knuth.
+  A small web application, which gives a nice demonstartion of hwo to use the React framework.
+  </dd>
+</dl>
+
+<dl>
+  <dt><code>
   notes_on_JS
   </code> </dt>
   <dd> 
