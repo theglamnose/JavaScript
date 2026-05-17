@@ -1,0 +1,41 @@
+.floor{
+    display: flex;
+    flex-direction: row;
+    width: 15rem;
+    background-color: bisque;
+    border: solid black 1px;
+    justify-content:space-around ;
+    height: 120px;
+}
+
+.floorNr{
+    font-size: larger;
+}
+
+.queue{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items:end;
+    width: 7rem;
+    justify-content:right;
+}
+
+.floorButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.on{
+    color: red;
+}
+
+.off{
+    color: black;
+}
+
+.home{
+    font-style: italic;
+    font-weight: 900;
+}

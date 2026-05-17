@@ -1,0 +1,20 @@
+{
+    "content": "Configuration file for the elevator simulation.",
+    "elevator": {
+        "TimeToOpenDoors": 20,
+        "TimeUntilClosingDoors": 76,
+        "TimeUntilClosingDoorsFast": 25,
+        "TimeToCloseDoors": 20,
+        "TimeToHoldDoorsOpen": 40,
+        "TimeToBuildUpSpeed": 15,
+        "TimeToMoveUp": 51,
+        "TimeToMoveDown": 61,
+        "TimeToLooseSpeedUp": 14,
+        "TimeToLooseSpeedDown": 23,
+        "TimeUntilInaction": 300
+    },
+    "user": {
+        "TimeToLeaveCabin": 25,
+        "TimeToEnterCabin": 25
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "Contents": "Simulation example taken from Knuth's textbook, p.286.",
+    "Users": [
+        { "Name": 1, "In": 0, "Out": 2, "GiveUpTime": 152, "InterTime": 38},
+        { "Name": 2, "In": 4, "Out": 1, "GiveUpTime": 500, "InterTime": 98},
+        { "Name": 3, "In": 2, "Out": 1, "GiveUpTime": 800, "InterTime": 5},
+        { "Name": 4, "In": 2, "Out": 1, "GiveUpTime": 800, "InterTime": 150},
+        { "Name": 5, "In": 3, "Out": 1, "GiveUpTime": 500, "InterTime": 73},
+        { "Name": 6, "In": 2, "Out": 1, "GiveUpTime": 176, "InterTime": 238},
+        { "Name": 7, "In": 1, "Out": 2, "GiveUpTime": 600, "InterTime": 225},
+        { "Name": 8, "In": 1, "Out": 0, "GiveUpTime": 400, "InterTime": 49},
+        { "Name": 9, "In": 1, "Out": 3, "GiveUpTime": 400, "InterTime": 172},
+        { "Name": 10, "In": 0, "Out": 4, "GiveUpTime": 400, "InterTime": 650}
+    ]
+}

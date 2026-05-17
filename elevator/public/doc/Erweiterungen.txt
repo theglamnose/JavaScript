@@ -1,0 +1,8 @@
+
+1. User-Liste bearbeiten und speichern (Server-Seite)
+2. Fahrstuhl-Parameter bearbeiten und speichern (Server-Seite)
+3. Animationen für ausgeführte Aktionen
+4. Hübsche Details (z. Bsp. Personenikone für Benutzer)
+5. Komplette automatische Ausführung einer Simulation:
+   - Aufzeichnung von Statistikdaten (mittlere Wartezeit)
+   - Protokoll aller Aktionen
