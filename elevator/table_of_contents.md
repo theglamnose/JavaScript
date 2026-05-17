@@ -2,7 +2,7 @@
 # Elevator simulation
   
 In the directory at hand you will find a small web application (using the React framework), which
-simulates an elevator. The algorithm is taken form the textbook "*The Art of Computer Programming*" written by Donald Ervin Knuth.
+simulates an elevator. The algorithm is taken from the textbook "*The Art of Computer Programming*" written by Donald Ervin Knuth.
 The implementation is a nice example how to connect a state-based algorithm with some graphical elements in HTML
 by using the React framework.
 
