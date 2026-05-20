@@ -1,0 +1,4 @@
+
+ * Wenn man nur fs aus Node verwendet, kann man TS compilieren:
+    bun build index.ts --compile
+    

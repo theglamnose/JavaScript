@@ -1,0 +1,156 @@
+<!-- 
+This is a template string with HTML code for a single web page.
+The template string is filled with a list relative paths by the program 'inedx.ts'
+and a new file 'index.html'. is generated.
+
+After opening the produced file 'index.html' a table is shown with the following structure
+of single row:
+
++----------+-----------+
+| <path>   |  <button> |
++----------+-----------+
+
+The path is an anchor element, which opens a directory in the web browser.
+A click on the button copies the full path to the clipboard, so the path
+can be used in a file browser.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- Place your mapping here -------------------------------------------->
+    <script id="paths" type="application/json">
+         {{paths}} 
+    </script>
+<!-- ------------------------------------------------------------------ -->
+
+    <h2>Keywords</h2>
+        {{keywords}}
+
+    <h2> Paths </h2>
+    <table id="table" >
+    </table>
+
+<!-- ------------------------------------------------------------------ -->
+
+    <script>
+        function onWindows(){
+            const platform = navigator.platform.toLowerCase();
+            return(
+                platform.includes("win")
+            )
+        };
+        const onWin = onWindows();
+
+        const unixSep = '/';
+        const windowsSep = '\\';
+        const sep = '|';
+
+        // String positions
+        const firstPos = 0;
+        const secondPos = firstPos + 1;
+        const thirdPos = secondPos + 1;
+
+        // Root for anchor elements:
+        function buildHrefRoot(p){ // Works on Unix and on Windows.
+            const dir = p.substring(firstPos, p.lastIndexOf( unixSep));  
+            return( dir + unixSep);
+        }
+        
+        const hRefRoot = buildHrefRoot( window.location.href); // Unix notation.
+        		
+        const localPathPrefix = "file:///";
+
+        function buildWindowsRoot(p){ // For Windows system.
+            const result = p.substring(secondPos);
+            const dir = result.substring(firstPos, result.lastIndexOf( unixSep));            
+            const r = dir.split( unixSep).join( windowsSep);  
+            
+            if( hRefRoot.startsWith( localPathPrefix)){
+                // path format for local drive in 'hRefRoot':
+                //   "file:///" <drive letter> ":/" <path>
+                return( r + windowsSep);
+            }else{
+                // path format for network drive in 'hRefRoot':
+                //   "file://" <identifier> "/" <drive name> "/" <path>
+                const id = hRefRoot.split( unixSep)[ thirdPos];
+                return( windowsSep + windowsSep + id + windowsSep + r + windowsSep);
+            }                
+        }
+
+        // Network drive on Unix system (SMB protocol)
+        const SMBshare = 'smb-share';
+        const SMBprefix = 'smb://';
+
+        function buildUnixRoot(p){
+            const dir = p.substring(firstPos, p.lastIndexOf( unixSep));  
+            if( dir.includes( SMBshare)){
+                // path format: "/../smb-share:server=" <name> ",share=" <path>
+                const serverName = dir.split(',')[ firstPos].split('=')[ secondPos];
+                const path = dir.split(',')[ secondPos].split('=')[ secondPos];
+                return( SMBprefix + serverName + unixSep + path + unixSep);
+            }else{
+                return( dir + unixSep);
+            }
+        }
+
+        function buildRoot(p){
+            if( onWin){
+                return( buildWindowsRoot(p));
+            }else{
+                return( buildUnixRoot(p));
+            }
+        }
+                
+        const fileRoot = buildRoot( window.location.pathname); // Unix notation.        
+
+        function windowPath(p){
+            const q = p.split( sep).join( windowsSep); 
+            return q;           
+        }
+        function unixPath(p){
+            const q = p.split( sep).join( unixSep); 
+            return q;           
+        }
+        function adaptSep(p){
+            if( onWin){
+                return( windowPath(p))
+            }else{
+                return( unixPath(p))
+            }
+        }
+
+        const table_el = document.getElementById('table');
+        table_el.innerHTML = '';
+
+        function insertRow( p){
+            const row = table_el.insertRow();
+
+            const td1 = document.createElement("td");
+            const anchor_el = document.createElement("a");
+            anchor_el.href = hRefRoot + adaptSep(p);
+            anchor_el.textContent = p;
+            td1.appendChild( anchor_el);
+            row.appendChild(td1);
+            
+            const td2 = document.createElement("td");
+            const btn_el = document.createElement('button');
+            btn_el.textContent = "Copy to clipboard";
+            btn_el.addEventListener( 'click',
+                () => 
+                    navigator.clipboard.writeText( adaptSep( fileRoot + p)));
+            td2.appendChild( btn_el);
+            row.appendChild(td2);
+        }
+
+        const paths_el = JSON.parse(document.getElementById('paths').textContent);
+        paths_el.forEach( 
+            insertRow
+        );
+    </script></body>
+</html>
