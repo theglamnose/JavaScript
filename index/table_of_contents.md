@@ -20,14 +20,14 @@ The JSON file contains an m:n relation between relative paths and search strings
 
 This JSON file can be used by the tool to search for directories by giving a list
 of search strings. The search result is an HTML file `index.html`, which contains the paths to
-the found subdirectories. A found subdirectory can be accessed in two ways:
-1. Click on an anchor element opens the directory in the web browser.
+the found subdirectories. A found subdirectory can be accessed in two ways:  
+1. Click on an anchor element opens the directory in the web browser.  
 2. Click on the 'Copy to clipboard' button copies the full path to the clipboard,
   so that the path can be used in a file browser.
 
 Two options are offered for string comparison:  
---case: comparison is performed case sensitive;  
---partial: comparison is is successful on substrings.
+--case: comparison is performed case sensitive (default value is off);  
+--partial: comparison is successful on substrings  (default value is off).
 
 For the generation of the `index.html`, the tool uses the template file `index_template.html`,
 which has to placed in the same directory as `index.ts`.
@@ -37,9 +37,23 @@ again (because we use a special separator for path components).
 Also the produced HTML file can used on both operating systems: Windows and Linux.
 
 ### 1.2 Technology
-The tool is written in TypeScript.
+The tool is written in TypeScript and uses HTML (with embedded JavaScript code) as output file format.
 
-### 1.3 Commands
+## 2 Usage
+
+### 2.1 Installation
+The tool requires the run-time environment `bun` for TypeScript.
+
+Because the tool only uses the fs package, it can be compiled with the following command:
+
+```shell
+bun build index.ts --compile
+```
+Unfortunately the generated binary is about 100 MB big, whereas the bun environment is only 30 MB big.  
+
+
+
+### 2.2 Usage
 
 The tool offers the following commandline options:
 
@@ -54,10 +68,13 @@ index --search <strings> [--case] [--partial]
    # <strings> are separated by the comma character ','.
    # The found paths are written to an HTML file 'index.html',
    # which contains a table with full hyperlinks to the directories.
+   
    # Per default the comparison is performed not case sensitive. 
    # By giving the option `--case` it is performed case sensitive.
+   
    # Per default a search has to match a whole string found in an `index.txt` file.
    # By giving the option `--partial` a partial match is performed.
+   
    # The command line options are read from left to right. This means, that
    # a given option applies only to the remaining options on the right
    # of the option.
@@ -70,21 +87,22 @@ index --help
    # Give help and show this text.
 ```
 
-## 2 Source files
+## 3 Source code
+
+### 3.1 List of files
 The tool consists of the following files:
 
 ```shell
-index.ts # Typescript source code of the tool. 
+index.ts                          # Typescript source code of the tool. 
 index_template.html # HTML file with template for the generation of the 'index.html'.
 ```
 
-## 3 Installation
-The tool requires the run-time environment `bun` for TypeScript.
+### 3.2 What you can learn
+It might be of interest for you to see how to ..  
+- dynamically produce an HTML file, which contains paths to the local file system  
+  (per default a web browser does not allow to use such a file);  
+- access to the local file system in TypeScript;   
+- handle file paths on network drives (on Windows and Linux);  
+- establish file paths, which can be used on Windows and on Linux at the same time;  
+- use an m:n-relation without a relational database.
 
-Because the tool only uses the fs package, it can be compiled with the following command:
-
-```shell
-bun build index.ts --compile
-```
-
-Unfortunately the binary is about 100 MB big, whereas the bun environment is only 30 MB big.
