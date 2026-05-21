@@ -65,7 +65,7 @@ npm run dev
 While reading the source code you can learn, how to ...
 + define a clear software architecture, which separates between logic and user interface,
 + apply the React concept of a reducer,
-+ buidl a simulation system with discrete time logic.
++ build a simulation system with discrete time logic.
 
 <dl>
   <dt><code>
