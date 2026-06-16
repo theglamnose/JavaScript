@@ -1,7 +1,7 @@
 
-# JavaScript: Programs
+# JavaScript
   
-In the directory at hand you will find some programs written in JavaScript.
+In the directory at hand you will find some programs written in JavaScript/TypeScript.
 
 ## Contents
 
@@ -52,13 +52,22 @@ In the directory at hand you will find some programs written in JavaScript.
 
 <dl>
   <dt><code>
+  to-do-list
+  </code> </dt>
+  <dd> 
+  A small commandline program to manage a task list. This program is a nice demonstration of how
+  to apply object-oriented analysis and use classes in JavaScript.
+  </dd>
+</dl>
+  
+<dl>
+  <dt><code>
   
   </code> </dt>
   <dd> 
   
   </dd>
 </dl>
-  
   
 
   
