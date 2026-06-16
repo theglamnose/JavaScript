@@ -3,7 +3,7 @@
 
 // It is important to know this special kind of copy mechanism,
 // because errors based on a wrong understanding of copy methods
-// can lead to surprising program behaviour, which is hard to fix.
+// can lead to surprising program behavior, which is hard to fix.
 
 // JavaScript uses objects a lot and often you want to make a copy of an existing object.
 // E. g. think about a default value, which is used while launching a program.

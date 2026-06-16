@@ -33,7 +33,7 @@ The web application was developed with the React framework and uses TypeScript a
   This subdirectory contains the React components of the simulation:
   * User list: for each user in and out floor, give-up time and time for next user appearance.
     A user, who is currently in the building, is marked with a red number.
-  * Action list: a list of scheduled actions with timepoint in the future.
+  * Action list: a list of scheduled actions with time point in the future.
     The next action to be executed is shown right above the action list together with the current time.
     Click on the button `Next action` to execute this action.
     The `reset` button resets the application to its initial state.

@@ -5,13 +5,13 @@ If you ask how many elements an array contains you use the length property:
    console.log( [1,2,3].length); // yields 3.
 
 But JavaScript supports arrays with gaps in it, called sparse arrays.
-The following arary conains only the three even numbers up to 4, but has a length of 5:
+The following array contains only the three even numbers up to 4, but has a length of 5:
    console.log( [0, ,2, ,4].length); // yields 5
 
 So length does not count the number of elements in an array, but returns the
-highest index of a definded element plus one.   
+highest index of a defined element plus one.   
 That length does return 0 for an empty array is correct, because this means the highest index
-of a definded element is -1. But this is not a legal index, and so this element cannot exist.
+of a defined element is -1. But this is not a legal index, and so this element cannot exist.
 
 To count elements in a sparse array use the filter method:
     console.log( [0, ,2, ,4].filter( e => { return( !(e === undefined))}).length); // yields 3.

@@ -14,7 +14,7 @@
 // In general, the recursion method works as follows to solve a big problem B:
 // 1. Find an easy way to break problem B into a series of smaller problems B1,..,Bn,
 //    which are all of the same kind as B. n is at least 1, but can also be greater number.
-//    The importat aspect is, that the breaking operation can be performed without great effort,
+//    The important aspect is, that the breaking operation can be performed without great effort,
 //    and if some solutions for B1,..,Bn can found, then these solutions can be combined to
 //    build a solution for problem B.
 // 2. Continue step 1 for each problem repeatedly until you have a set of problems E,

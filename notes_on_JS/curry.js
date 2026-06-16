@@ -1,6 +1,6 @@
 // Currying - some hot aspects of JavaScript
 
-// If you have used a functional progamming language as for example ML or Lisp
+// If you have used a functional programming language as for example ML or Lisp
 // you may be familiar with a function transformation called currying and uncurrying.
 // Though JaVaScript is not a pure functional programming language, it supports these transformations.
 
@@ -97,7 +97,7 @@ console.log( l.map( Curry( multChar)("a")));
     // no extra definition of multCharCurry needed.
 console.log( "~~~~~\n");
 
-// We can do the transfomation of currying also the other way around:
+// We can do the transformation of currying also the other way around:
 // given a function, which takes its arguments one by one, we transform it
 // to a function, which requires all its arguments in one tuple.
 

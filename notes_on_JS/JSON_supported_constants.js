@@ -1,5 +1,5 @@
 
-// Small demo, which shows the behaviour of
+// Small demo, which shows the behavior of
 //   * JSON.stringify() and
 //   * JSON.parse()
 // with respect to JavaScript constants.

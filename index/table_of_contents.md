@@ -93,7 +93,7 @@ index --help
 The tool consists of the following files:
 
 ```shell
-index.ts                          # Typescript source code of the tool. 
+index.ts            # Typescript source code of the tool. 
 index_template.html # HTML file with template for the generation of the 'index.html'.
 ```
 

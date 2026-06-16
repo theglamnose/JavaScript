@@ -12,7 +12,7 @@ function genFun(): () => number {
     return f;
 };
 
-// I you look at the type annotation in line 7 you notice, that genFun takes no argument
+// If you look at the type annotation in line 7 you notice, that genFun takes no argument
 // but returns a function of type "() => number".
 // Let's generate a new function with genFun:
 let newF: () => number =

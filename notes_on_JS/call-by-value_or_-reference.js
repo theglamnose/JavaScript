@@ -1,12 +1,12 @@
 // Call-by-value or call-by-reference in JavaScript?
 
-// If you make any changes to a parameter inside a function declaration, there are two differnet ways of handling it:
+// If you make any changes to a parameter inside a function declaration, there are two different ways of handling it:
 //   Call-by-value: the change of the parameter does not affect the value of the variable given in the function call.
 //      This means, that only the value of the parameter is used.
 //   Call-by-reference: the change of the parameter does affect the value of the variable given in the function call.
 //      This means, that a reference of the parameter is used.
 
-// JavaScript uses both consepts depending of the parameter type:
+// JavaScript uses both concepts depending of the parameter type:
 //   Call-by-value is used for simple types (integer, boolean, string, ...)
 //   Call-by-reference is used for objects (But not always! Get ready for some surprises.).
 

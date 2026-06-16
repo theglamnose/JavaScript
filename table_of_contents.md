@@ -21,7 +21,7 @@ In the directory at hand you will find some programs written in JavaScript.
   </code> </dt>
   <dd> 
   A small tool written in TypeScript, which manages an index of a directory tree. The basic idea
-  is to assign to selected subdirectories search strings. To save time, all assigments of strings
+  is to assign to selected subdirectories search strings. To save time, all assignments of strings
   can be collected in a JSON file,
   which can be searched by a list of search strings. The result is an HTML file, which offers
   hyperlinks to subdirectories (access to web browser) and full paths to be used in a file browser.
