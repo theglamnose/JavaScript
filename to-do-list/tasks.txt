@@ -1,0 +1,2 @@
+Read the manual|false
+Relax|false
