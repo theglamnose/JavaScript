@@ -20,14 +20,14 @@ a table with the following structure is generated:
 
 +---------------+
 | <path>        |  (a button)
+| <keywords>    |  (anchor element)
 +---------------+
-  <keywords>        (anchor element)
 
 : // again and again for all the other paths
 
 Clicking on any of the keywords will open the file browser of your web browser.
 If you do not like the embedded file browser, you can instead click on the button with path:
-the path is copied to your clipboard, and you can use your own favorite file browser.
+the path is copied to your clipboard, and you can use your own favourite file browser.
 
 The HTML file is self-contained: you do not need any run-time environments or frameworks.
 -->
@@ -38,16 +38,32 @@ The HTML file is self-contained: you do not need any run-time environments or fr
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        h1{
+            color: white;
+        }
+    	table{
+            border-collapse: collapse;
+            background-color: beige;
+    	}
+        table td {
+            border: 1px solid black;
+            padding: 0.5rem;
+        }
+    </style>
 </head>
 <body>
 <!-- Place your mapping here -------------------------------------------->
     <script id="keywords" type="application/json">
         [{
-            "path": "documents|SQL|lessons",
-            "keywords": "SQL, delete, insert"},{
-            "path": "documents|HTML|exercises",
-            "keywords": "HTML, CSS"
-            }
+            "path": "P",
+            "keywords": "KW"}
+            ,{
+            "path": "",
+            "keywords": ""}
         ]
     </script>
 <!-- ------------------------------------------------------------------ -->
@@ -151,21 +167,24 @@ The HTML file is self-contained: you do not need any run-time environments or fr
         
         function insertRowHRef(ks,p){
             const row = table.insertRow();
+            const cell = row.insertCell();
+
+            const btn_el = document.createElement('button');
+            btn_el.textContent = p;
+            btn_el.addEventListener( 'click',
+                () => 
+                    navigator.clipboard.writeText( adaptSep( fileRoot + p))
+            );
+
+            cell.appendChild( btn_el);
+
+            cell.appendChild(document.createElement("br"));
+
             const anchor_el = document.createElement("a");
             anchor_el.href = hRefRoot + adaptSep(p);
             anchor_el.textContent = ks;
-            row.appendChild( anchor_el);
-        }
 
-        function insertRowWithCopy(t){
-            const row = table.insertRow();
-            const btn_el = document.createElement('button');
-            btn_el.textContent = t;
-            btn_el.addEventListener( 'click',
-                () => 
-                    navigator.clipboard.writeText( adaptSep( fileRoot + t))
-            );
-            row.appendChild( btn_el);
+            cell.appendChild( anchor_el);
         }
 
         const table_el = document.getElementById('table');
@@ -173,7 +192,6 @@ The HTML file is self-contained: you do not need any run-time environments or fr
 
         const keywords_el = JSON.parse(document.getElementById('keywords').textContent);
         keywords_el.forEach(element => {
-            insertRowWithCopy( element.path);
             insertRowHRef( element.keywords, element.path);
         });
     </script></body>
