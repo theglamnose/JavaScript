@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./pics/reversi.png">
+    <title>Reversi</title>
+  </head>
+  <body>
+
+    <div id="alert_frame" class="dialogue_frame">
+        <div class="dialogue">
+            <p id="alert_question">Question</p>
+            <div class="dialogue_buttons">
+                <button id="alert_ok" class="green">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm_frame" class="dialogue_frame">
+        <div class="dialogue">
+            <p id="confirm_question">Question</p>
+            <div class="dialogue_buttons">
+                <button id="confirm_yes" class="green">Yes</button>
+                <button id="confirm_no" class="red">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="read_number_frame" class="dialogue_frame">
+        <div class="dialogue">
+            <p id="read_number_heading">Heading</p>
+            <input type="number" id="read_number_input" min="0" max="1">
+            <div class="dialogue_buttons">
+                <button id="read_number_ok" class="green">OK</button>
+                <button id="read_number_cancel" class="red">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <h1>Reversi</h1>
+
+    <div id="table">
+        <div id="frame">
+            <div id="board_buttons">
+                <div id="board">
+                    <div class="row">
+                        <div class="corner"> </div>
+                        <div class="col_num">a</div>
+                        <div class="col_num">b</div>
+                        <div class="col_num">c</div>
+                        <div class="col_num">d</div>
+                        <div class="col_num">e</div>
+                        <div class="col_num">f</div>
+                        <div class="col_num">g</div>
+                        <div class="col_num">h</div>
+                        <div class="corner"> </div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">1</div>
+                        <div id="a1" class="square"></div>
+                        <div id="b1" class="square"></div>
+                        <div id="c1" class="square"></div>
+                        <div id="d1" class="square"></div>
+                        <div id="e1" class="square"></div>
+                        <div id="f1" class="square"></div>
+                        <div id="g1" class="square"></div>
+                        <div id="h1" class="square"></div>
+                        <div class="row_num">1</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">2</div>
+                        <div id="a2" class="square"></div>
+                        <div id="b2" class="square"></div>
+                        <div id="c2" class="square"></div>
+                        <div id="d2" class="square"></div>
+                        <div id="e2" class="square"></div>
+                        <div id="f2" class="square"></div>
+                        <div id="g2" class="square"></div>
+                        <div id="h2" class="square"></div>
+                        <div class="row_num">2</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">3</div>
+                        <div id="a3" class="square"></div>
+                        <div id="b3" class="square"></div>
+                        <div id="c3" class="square"></div>
+                        <div id="d3" class="square"></div>
+                        <div id="e3" class="square"></div>
+                        <div id="f3" class="square"></div>
+                        <div id="g3" class="square"></div>
+                        <div id="h3" class="square"></div>
+                        <div class="row_num">3</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">4</div>
+                        <div id="a4" class="square"></div>
+                        <div id="b4" class="square"></div>
+                        <div id="c4" class="square"></div>
+                        <div id="d4" class="square"></div>
+                        <div id="e4" class="square"></div>
+                        <div id="f4" class="square"></div>
+                        <div id="g4" class="square"></div>
+                        <div id="h4" class="square"></div>
+                        <div class="row_num">4</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">5</div>
+                        <div id="a5" class="square"></div>
+                        <div id="b5" class="square"></div>
+                        <div id="c5" class="square"></div>
+                        <div id="d5" class="square"></div>
+                        <div id="e5" class="square"></div>
+                        <div id="f5" class="square"></div>
+                        <div id="g5" class="square"></div>
+                        <div id="h5" class="square"></div>
+                        <div class="row_num">5</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">6</div>
+                        <div id="a6" class="square"></div>
+                        <div id="b6" class="square"></div>
+                        <div id="c6" class="square"></div>
+                        <div id="d6" class="square"></div>
+                        <div id="e6" class="square"></div>
+                        <div id="f6" class="square"></div>
+                        <div id="g6" class="square"></div>
+                        <div id="h6" class="square"></div>
+                        <div class="row_num">6</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">7</div>
+                        <div id="a7" class="square"></div>
+                        <div id="b7" class="square"></div>
+                        <div id="c7" class="square"></div>
+                        <div id="d7" class="square"></div>
+                        <div id="e7" class="square"></div>
+                        <div id="f7" class="square"></div>
+                        <div id="g7" class="square"></div>
+                        <div id="h7" class="square"></div>
+                        <div class="row_num">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="row_num">8</div>
+                        <div id="a8" class="square"></div>
+                        <div id="b8" class="square"></div>
+                        <div id="c8" class="square"></div>
+                        <div id="d8" class="square"></div>
+                        <div id="e8" class="square"></div>
+                        <div id="f8" class="square"></div>
+                        <div id="g8" class="square"></div>
+                        <div id="h8" class="square"></div>
+                        <div class="row_num">8</div>
+                    </div>
+                    <div class="row">
+                        <div class="corner"> </div>
+                        <div class="col_num">a</div>
+                        <div class="col_num">b</div>
+                        <div class="col_num">c</div>
+                        <div class="col_num">d</div>
+                        <div class="col_num">e</div>
+                        <div class="col_num">f</div>
+                        <div class="col_num">g</div>
+                        <div class="col_num">h</div>
+                        <div class="corner"> </div>
+                    </div>
+                </div>
+                <div id="game_buttons">
+                    <button id="btn_swap">S<span class="emph">w</span>ap colours</button>
+                    <button id="btn_strength">Set <span class="emph">s</span>trength</button>
+                    
+                    <button id="btn_moves">Show <span class="emph">m</span>oves</button>
+                    <button id="btn_best_move">Show <span class="emph">b</span>est move</button>
+
+                    <button id="btn_to_clpboard"><span class="emph">C</span>opy to clipboard</button>
+                    <button id="btn_from_clpboard"><span class="emph">L</span>oad from clipboard</button>
+
+                    <button id="btn_reset"><span class="emph">R</span>eset game</button>
+                    <button id="btn_exit">E<span class="emph">x</span>it game</button>
+                </div>
+            </div>
+            <div id="state"></div>
+            <div id="message"></div>
+        </div>
+    </div>
+    <script src="./src/reversi.ts" type="module" defer></script>
+  </body>
+</html>

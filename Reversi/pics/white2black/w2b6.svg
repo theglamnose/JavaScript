@@ -1,0 +1,18 @@
+<svg width="45" height="45" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left white semicircle -->
+  <path d="M22.5 0
+           A22.5 22.5 0 0 0 22.5 45
+           Z"
+        fill="black"/>
+
+  <!-- Right black semicircle -->
+  <path d="M22.5 0
+           A22.5 22.5 0 0 1 22.5 45
+           Z"
+        fill="white"/>
+
+<ellipse cx="22.5" cy="22.5"
+           rx="11.25" ry="22.5"
+           fill="black"/>
+
+</svg>
