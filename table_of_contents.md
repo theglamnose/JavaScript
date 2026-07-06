@@ -52,6 +52,16 @@ In the directory at hand you will find some programs written in JavaScript/TypeS
 
 <dl>
   <dt><code>
+  Reversi
+  </code> </dt>
+  <dd> 
+  An application written in TypeScript and SASS to play Reversi (aka Othello) against the machine.
+  </dd>
+</dl>
+
+
+<dl>
+  <dt><code>
   to-do-list
   </code> </dt>
   <dd> 
